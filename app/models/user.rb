@@ -17,7 +17,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: true }
 
   # password属性のバリデーション
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   # セキュアパスワード
   has_secure_password
