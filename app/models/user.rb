@@ -2,6 +2,9 @@ class User < ApplicationRecord
 
   attr_accessor :remember_token, :activation_token, :reset_token
 
+  # 関連付け
+  has_many :microposts, dependent: :destroy
+
   # コールバック
   before_save :downcase_email
   before_create :create_activation_digest
@@ -9,15 +12,11 @@ class User < ApplicationRecord
   # email属性の正規表現
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
-  # name属性のバリデーション
+  # バリデーション
   validates :name, presence: true, length: { maximum: 50 }
-
-  # email属性のバリデーション
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: true }
-
-  # password属性のバリデーション
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   # セキュアパスワード
@@ -77,6 +76,11 @@ class User < ApplicationRecord
   # パスワード再設定の期限が切れている場合はtrueを返す
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+  # 試作feedの定義
+  def feed
+    Micropost.where("user_id = ?", id)
   end
 
   private
