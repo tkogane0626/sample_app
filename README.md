@@ -1,24 +1,37 @@
-# README
+# Ruby on Rails チュートリアルのサンプルアプリケーション
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+これは、次の教材で作られたサンプルアプリケーションです。
+[*Ruby on Rails チュートリアル*](https://railstutorial.jp/)
+（第7版）
+[Michael Hartl](https://www.michaelhartl.com/) 著
 
-Things you may want to cover:
+## ライセンス
 
-* Ruby version
+[Ruby on Rails チュートリアル](https://railstutorial.jp/)内にある
+ソースコードはMITライセンスとBeerwareライセンスのもとで公開されています。
+詳細は [LICENSE.md](LICENSE.md) をご覧ください。
 
-* System dependencies
+## 使い方
 
-* Configuration
+このアプリケーションを動かす場合は、まずはリポジトリを手元にクローンしてください。
 
-* Database creation
+```
+$ git clone https://github.com/tkogane0626/sample_app.git
+```
 
-* Database initialization
+次に、Dockerイメージの作成とDockerコンテナの起動を行います。
 
-* How to run the test suite
+```
+$ docker compose up --build
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+最後に、Dockerコンテナ内でDBマイグレーションを実行します。
 
-* Deployment instructions
+```
+$ docker exec -it sample_app bash
+$ rails db:create
+$ rails db:migrate
+```
 
-* ...
+詳しくは、[*Ruby on Rails チュートリアル*](https://railstutorial.jp/)
+を参考にしてください。
