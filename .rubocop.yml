@@ -1,5 +1,7 @@
 AllCops:
-  NewCops: enable
+    Exclude:
+    - "db/schema.rb"
+    NewCops: enable
 
 ##################### Gemspec ##################################
 Gemspec/DeprecatedAttributeAssignment:
